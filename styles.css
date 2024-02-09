@@ -1,0 +1,26 @@
+body {
+    margin: 0px;
+}
+input {
+    font-size: large;
+}
+.Szene {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    background-color: aqua;
+}
+.Anweisung {
+    position: absolute;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto;
+    transition: width 2s;
+    width: 100%;
+}
+.Anweisung.versteckt {
+    width: 0px;
+}
