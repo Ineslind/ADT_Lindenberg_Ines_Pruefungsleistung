@@ -6,12 +6,23 @@ input {
 }
 .Szene {
     display: flex;
+    position: absolute;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     width: 100vw;
     height: 100vh;
+    transition: opacity 1s;
+}
+#IntroSzene {
     background-color: aqua;
+}
+#AnleitungSzene {
+    background-color: aquamarine;
+}
+.Szene.ausgeblendet {
+    opacity: 0;
+    pointer-events: none;
 }
 .Anweisung {
     position: absolute;
