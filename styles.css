@@ -1,5 +1,6 @@
 body {
     margin: 0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 input {
     font-size: large;
@@ -34,4 +35,7 @@ input {
 }
 .Anweisung.versteckt {
     width: 0px;
+}
+.Spielername {
+    font-weight: 600;
 }

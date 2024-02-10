@@ -5,6 +5,10 @@ setTimeout(() => {
         document.getElementById("IntroSzene").classList.add("ausgeblendet")
         document.getElementById("AnleitungSzene").classList.remove("ausgeblendet")
         
+        const spielerName =  document.getElementById("SpielerInput").value
+        document.querySelectorAll(".Spielername").forEach(e => {
+            e.textContent = spielerName
+        });
     })
 
 }, 500)
