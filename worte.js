@@ -1,0 +1,86 @@
+const wortspeicher = [
+    {
+        kategorie: "Unter Wasser",
+        worte: [
+            "Qualle",
+            "Seestern",
+            "Delfin",
+            "Walhai",
+            "Koralle",
+            "Krabbe",
+            "Tintenfisch",
+            "Muschel",
+            "Seegurke",
+            "Seeanemone",
+            "Seeigel",
+            "Schwertwal",
+            "Haifisch",
+            "Kugelfisch",
+            "Manta",
+            "Napoleon-Lippfisch",
+            "Seeotter",
+            "Rochen",
+            "Anakonda",
+            "Gigantischer Tintenfisch"
+        ]
+    },
+    {
+        kategorie: "Wassersport",
+        worte: [
+            "Surfen",
+            "Windsurfen",
+            "Kitesurfen",
+            "Segeln",
+            "Kajakfahren",
+            "Kanufahren",
+            "Rafting",
+            "Stand-Up-Paddeln (SUP)",
+            "Wasserski",
+            "Wakeboarding",
+            "Bodyboarding",
+            "Wassergymnastik",
+            "Wasserpolo",
+            "Wasserspringen",
+            "Unterwasserhockey",
+            "Rettungsschwimmen",
+            "Wildwasserkajak",
+            "Rudern"
+        ]
+    },
+    {
+        kategorie: "Gewässer",
+        worte: [
+            "Atlantischer Ozean",
+            "Pazifischer Ozean",
+            "Indischer Ozean",
+            "Südlicher Ozean",
+            "Arktischer Ozean",
+            "Mittelmeer",
+            "Karibisches Meer",
+            "Rotes Meer",
+            "Nordsee",
+            "Schwarzes Meer",
+            "Kaspisches Meer",
+            "Oberer See",
+            "Baikalsee",
+            "Großer Bärensee",
+            "Victoriasee",
+            "Nil",
+            "Amazonas",
+            "Jangtsekiang",
+            "Mississippi",
+            "Donau",
+            "Panamakanal",
+            "Suezkanal",
+            "Kielkanal",
+            "Wellandkanal",
+            "Manchester Ship Canal",
+            "Rhein",
+            "Themse",
+            "Hudson River",
+            "Murray River",
+            "Ganges"
+        ]
+        
+    }
+]

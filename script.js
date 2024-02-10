@@ -10,5 +10,8 @@ setTimeout(() => {
             e.textContent = spielerName
         });
     })
-
+    let zufallsKategorie = Math.floor(Math.random() * wortspeicher.length);
+    console.log(wortspeicher[zufallsKategorie].kategorie)    
+    let zufallsWort = Math.floor(Math.random() * wortspeicher[zufallsKategorie].worte.length);
+    console.log(wortspeicher[zufallsKategorie].worte[zufallsWort])    
 }, 500)
