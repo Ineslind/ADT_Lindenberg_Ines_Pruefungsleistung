@@ -21,6 +21,9 @@ input {
 #AnleitungSzene {
     background-color: aquamarine;
 }
+#SpielSzene {
+    background-color: coral;
+}
 .Szene.ausgeblendet {
     opacity: 0;
     pointer-events: none;
@@ -38,4 +41,40 @@ input {
 }
 .Spielername {
     font-weight: 600;
+}
+#LoesungsWort {
+    padding-top: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 80%;
+}
+#Tastatur {
+    padding-top: 10vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80%;
+}
+.LoesungsBuchstabe {
+    height: 5vw;
+    width: 5vw;
+    background-color: azure;
+    border-bottom: 0.5vw solid blue;
+    text-align: center;
+    line-height: 6vw;
+    margin: 0.5vw;
+    font-size: 4vw;
+}
+.Buchstabe.leer {
+    opacity: 0;
+}
+.TastaturBuchstabe {
+    height: 5vw;
+    width: 5vw;
+    background-color: rgb(92, 196, 196);
+    text-align: center;
+    margin: 0.5vw;
+    font-size: 4vw;
 }

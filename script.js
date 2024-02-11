@@ -10,8 +10,40 @@ setTimeout(() => {
             e.textContent = spielerName
         });
     })
-    let zufallsKategorie = Math.floor(Math.random() * wortspeicher.length);
-    console.log(wortspeicher[zufallsKategorie].kategorie)    
-    let zufallsWort = Math.floor(Math.random() * wortspeicher[zufallsKategorie].worte.length);
-    console.log(wortspeicher[zufallsKategorie].worte[zufallsWort])    
+    let zufallsKategorieIndex = Math.floor(Math.random() * wortspeicher.length);
+    let zufallsKategorie = (wortspeicher[zufallsKategorieIndex].kategorie)   
+
+    let zufallsWortIndex = Math.floor(Math.random() * wortspeicher[zufallsKategorieIndex].worte.length);
+    let zufallsWort = wortspeicher[zufallsKategorieIndex].worte[zufallsWortIndex]
+
+    ErstelleBuchstabenBlock(
+        document.getElementById("LoesungsWort"),
+        zufallsWort,
+        document.getElementById("Vorlagen").querySelector(".LoesungsBuchstabe"),
+        true
+    )
+
+    ErstelleBuchstabenBlock(
+        document.getElementById("Tastatur"),
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ",
+        document.getElementById("Vorlagen").querySelector(".TastaturBuchstabe"),
+        false
+    )
+
+    console.log(zufallsKategorie, zufallsWort)
 }, 500)
+
+function ErstelleBuchstabenBlock(Bereich, Wort, Vorlage, Blind){
+
+    for (let index = 0; index < Wort.length; index++) {
+        const buchstabe = Vorlage.cloneNode();
+        if (Wort.charAt(index) === " "){
+            buchstabe.classList.add("leer")
+        }
+        if (!Blind) {
+            buchstabe.textContent = Wort.charAt(index)
+        }
+        Bereich.appendChild(buchstabe);
+    }
+}
+
