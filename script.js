@@ -20,6 +20,7 @@ setTimeout(() => {
             });
             
             BaueSpielfeld()
+            BaueAnzeigen()
             TastaturBehandlung()
             WechsleSzene()
         }
@@ -68,6 +69,8 @@ function ErstelleBuchstabenBlock(Bereich, Wort, Vorlage, Blind) {
 
     for (let index = 0; index < Wort.length; index++) {
         const buchstabe = Vorlage.cloneNode();
+        buchstabe.style.animationDelay = -Math.random()*1000 + "ms";
+        buchstabe.style.duration = (800 + Math.random()*400) + "ms";
         if (Wort.charAt(index) === " "){
             buchstabe.classList.add("leer")
         }
@@ -75,6 +78,7 @@ function ErstelleBuchstabenBlock(Bereich, Wort, Vorlage, Blind) {
             buchstabe.textContent = Wort.charAt(index)
         }
         Bereich.appendChild(buchstabe);
+        setTimeout(() => buchstabe.classList.remove("durchsichtig"), 100);
     }
 }
 
@@ -111,12 +115,22 @@ function BaueSpielfeld() {
     )
 }
 
+function BaueAnzeigen() {
+    ErstelleBuchstabenBlock(
+        document.getElementById("Leben"),
+        "•".repeat(Leben),
+        document.getElementById("Vorlagen").querySelector(".Ring"),
+        true
+    )
+    zeigeNachricht();
+}
+
 function TastaturBehandlung() {
     document.getElementById("Tastatur").addEventListener("click", event => {
         const buchstabe = BenutzeTaste(event.target)
         if (buchstabe) {
             if (!RateBuchstabe(zufallsWort, buchstabe)) {
-                Leben -= 1;
+                reduziereLeben();
             }
             else if (Modus === "Training" && WortWurdeErraten()) {
                 WechsleSzene();
@@ -124,8 +138,25 @@ function TastaturBehandlung() {
             }
             else if (Modus === "Highscore" && WortWurdeErraten()) {
                 aktuellerScore += 1;
+                zeigeNachricht();
                 BaueSpielfeld();
             }
         }
     })
+}
+
+function reduziereLeben() {
+    Leben -= 1;
+    document.getElementById("Leben").removeChild(
+        document.getElementById("Leben").lastChild
+    )
+}
+
+function zeigeNachricht() {
+    if (Modus === "Training") {
+        document.getElementById("Nachricht").textContent = "viel Spaß beim Training."
+    }
+    else {
+        document.getElementById("Nachricht").textContent = "du hast " + (aktuellerScore? aktuellerScore : "noch keine") + " Begriffe erraten."
+    }
 }

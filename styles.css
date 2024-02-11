@@ -3,7 +3,10 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 input {
-    font-size: large;
+    font-size: 6vw;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 0.5vw;
 }
 .Szene {
     display: flex;
@@ -16,25 +19,36 @@ input {
     transition: opacity 1s;
 }
 #IntroSzene {
-    background-color: aqua;
-}
-#AnleitungSzene {
-    background-color: aquamarine;
+    background-image: url(wasserspiegel.jpg);
+    background-size: auto 120vh;
+    background-position-x: center;
+    animation: hintergrundWabern 2s ease 0s alternate infinite;
 }
 #SpielSzene {
-    background-color: coral;
+    background-image: url(wasserspiegel.jpg);
+    background-size: auto 120vh;
+    background-position-x: center;
+    animation: hintergrundWabern 2s ease 0s alternate infinite;
 }
+@keyframes hintergrundWabern {
+    0% { background-position-y: -2vw }
+    100% { background-position-y: 0vw }
+}
+
 .Szene.ausgeblendet {
     opacity: 0;
     pointer-events: none;
 }
 .Anweisung {
     position: absolute;
+    top: -4vw;
     overflow: hidden;
     white-space: nowrap;
     margin: 0 auto;
     transition: width 2s;
     width: 100%;
+    font-size: 3vw;
+    font-family: 'Courier New', Courier, monospace;
 }
 .Anweisung.versteckt {
     width: 0px;
@@ -47,16 +61,20 @@ input {
     flex-direction: row;
 }
 #Buttons > div {
-    background-color: blanchedalmond;
+    background-color: rgba(255, 255, 255, 0.6);
     margin: 2vw;
     padding: 0.5vw;
     cursor: pointer;
+    font-size: min(4vw, 17px);
+    border-radius: 0.5vw;
 }
 #Buttons > div:hover {
-    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 #LoesungsWort {
+    position: absolute;
+    top: 35vh;
     padding-top: 10vh;
     display: flex;
     flex-direction: row;
@@ -64,42 +82,88 @@ input {
     width: 80%;
 }
 #Tastatur {
+    position: absolute;
+    bottom: 20vh;
     padding-top: 10vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     width: 80%;
+    max-width: 300px;
 }
 #Kategorie {
+    position: absolute;
+    top: 25vh;
     font-size: 2.5vw;
 }
 
 .LoesungsBuchstabe {
     height: 5vw;
     width: 5vw;
-    background-color: azure;
-    border-bottom: 0.5vw solid blue;
+    background-color: rgba(255, 255, 255, 0.6);
     text-align: center;
-    line-height: 6vw;
     margin: 0.5vw;
     font-size: 4vw;
+    animation: wabern 2s ease 0s alternate infinite;
+    transition: opacity 1s;
 }
+.LoesungsBuchstabe.durchsichtig {
+    opacity: 0;
+}
+
+@keyframes wabern {
+    0% { transform: translateY(-1vw) }
+    100% { transform: translateY(1vw) }
+}
+
 .LoesungsBuchstabe.leer {
     opacity: 0;
 }
 .TastaturBuchstabe {
     height: 5vw;
     width: 5vw;
-    background-color: rgb(92, 196, 196);
+    background-color: rgba(255, 255, 255, 0.4);
     text-align: center;
     margin: 0.5vw;
-    font-size: 4vw;
+    font-size: min(4vw, 17px);
     cursor: pointer;
+    max-width: 20px;
+    max-height: 20px;
+    transition: opacity 1s;
+}
+.TastaturBuchstabe.durchsichtig {
+    opacity: 0;
 }
 .TastaturBuchstabe.benutzt {
     opacity: 0.6;
     filter: blur(0.5vw);
     pointer-events: none;
 }
-
+#Leben {
+    position: absolute;
+    bottom: 2vh;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+.Ring {
+    width: 4vw;
+    height: 4vw;
+    background-image: url(lifesaver.png);
+    background-size: cover;
+    margin: 1vw;
+    transition: all 1s;
+}
+.Ring.durchsichtig {
+    transform: rotate(90deg);
+    opacity: 0;
+}
+#Fortschritt {
+    position: absolute;
+    top: 2vh;
+    width: 80%;
+    text-align: left;
+    font-size: 3vw;
+}
