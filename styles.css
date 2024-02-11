@@ -67,7 +67,7 @@ input {
     margin: 0.5vw;
     font-size: 4vw;
 }
-.Buchstabe.leer {
+.LoesungsBuchstabe.leer {
     opacity: 0;
 }
 .TastaturBuchstabe {
@@ -77,4 +77,10 @@ input {
     text-align: center;
     margin: 0.5vw;
     font-size: 4vw;
+    cursor: pointer;
 }
+.TastaturBuchstabe.benutzt {
+    opacity: 0.6;
+    filter: blur(0.5vw);
+}
+

@@ -29,6 +29,19 @@ setTimeout(() => {
         document.getElementById("Vorlagen").querySelector(".TastaturBuchstabe"),
         false
     )
+        
+    document.getElementById("Tastatur").addEventListener("click", event => {
+        if (event.target.classList.contains("TastaturBuchstabe")){
+            event.target.classList.add("benutzt")
+            for (let index = 0; index < zufallsWort.length; index++) {
+                if (zufallsWort.charAt(index) === event.target.textContent){
+                    document.getElementById("LoesungsWort").querySelectorAll(".LoesungsBuchstabe")[index].textContent = event.target.textContent
+                         
+                }
+            }
+        }
+    })
+
 
     console.log(zufallsKategorie, zufallsWort)
 }, 500)
