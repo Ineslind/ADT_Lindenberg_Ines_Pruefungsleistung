@@ -1,3 +1,7 @@
+let Highscores = []
+let aktuellerScore = 0
+let Leben = 10
+
 setTimeout(() => {
     
     document.querySelector(".Anweisung").classList.remove("versteckt"); 
@@ -31,14 +35,9 @@ setTimeout(() => {
     )
         
     document.getElementById("Tastatur").addEventListener("click", event => {
-        if (event.target.classList.contains("TastaturBuchstabe")){
-            event.target.classList.add("benutzt")
-            for (let index = 0; index < zufallsWort.length; index++) {
-                if (zufallsWort.charAt(index) === event.target.textContent){
-                    document.getElementById("LoesungsWort").querySelectorAll(".LoesungsBuchstabe")[index].textContent = event.target.textContent
-                         
-                }
-            }
+        const buchstabe = BenutzeTaste(event.target)
+        if (buchstabe) {
+            RateBuchstabe(zufallsWort, buchstabe)
         }
     })
 
@@ -46,7 +45,25 @@ setTimeout(() => {
     console.log(zufallsKategorie, zufallsWort)
 }, 500)
 
-function ErstelleBuchstabenBlock(Bereich, Wort, Vorlage, Blind){
+function RateBuchstabe(zufallsWort, buchstabe) {
+    for (let index = 0; index < zufallsWort.length; index++) {
+        if (zufallsWort.charAt(index) === buchstabe){
+            document.getElementById("LoesungsWort").querySelectorAll(".LoesungsBuchstabe")[index].textContent = buchstabe
+        }
+    }
+}
+
+function BenutzeTaste(taste) {
+    if (taste.classList.contains("TastaturBuchstabe")){
+        taste.classList.add("benutzt")
+        return taste.textContent
+    }
+    else {
+        return null;
+    }
+}
+
+function ErstelleBuchstabenBlock(Bereich, Wort, Vorlage, Blind) {
 
     for (let index = 0; index < Wort.length; index++) {
         const buchstabe = Vorlage.cloneNode();
