@@ -1,6 +1,6 @@
 const wortspeicher = [
     {
-        kategorie: "Unter Wasser",
+        kategorie: "ein Meereslebewesen",
         worte: [
             "QUALLE",
             "SEESTERN",
@@ -25,7 +25,7 @@ const wortspeicher = [
         ]
     },
     {
-        kategorie: "Wassersport",
+        kategorie: "eine Wassersportart",
         worte: [
             "SCHWIMMEN",
             "TAUCHEN",
@@ -51,7 +51,7 @@ const wortspeicher = [
         ]
     },
     {
-        kategorie: "Gewässer",
+        kategorie: "ein Gewässer",
         worte: [
             "ATLANTISCHER OZEAN",
             "PAZIFISCHER OZEAN",

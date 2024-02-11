@@ -9,7 +9,7 @@
     <script type="text/javascript" src="worte.js"></script>
 </head>
 <body>
-    <div id="IntroSzene" class="Szene ausgeblendet">
+    <div id="IntroSzene" class="Szene">
         <div style="position: relative; height: 100px">
             <form>
                 <input type="text" name="Spieler" placeholder="Mein Name" value="" id="SpielerInput">
@@ -18,29 +18,28 @@
                 Gib hier deinen Namen ein.
             </div>
         </div>
-        <div id="Start">
-            Spiel starten
+        <div id="Buttons">
+            <div id="Training">
+                Training
+            </div>
+            <div id="Highscore">
+                Highscore
+            </div>
         </div>
-    </div>
-
-    <div id="AnleitungSzene" class="Szene ausgeblendet">
-        <div>
-            <h2>Hallo <span class="Spielername"></span>!</h2>
-            So geht unser Spiel<br>
-            Viel Spaß <span class="Spielername"></span>
+        <div class="Anweisung versteckt">
+            Wähle einen Modus.
         </div>
     </div>
     
-    <div id="SpielSzene" class="Szene ">
+    <div id="SpielSzene" class="Szene ausgeblendet">
         <div id="Vorlagen" style="display: none";>
             <div class="LoesungsBuchstabe"></div>
             <div class="TastaturBuchstabe"></div>
         </div>
-
-        <div id="LoesungsWort">
-        </div>
-        <div id="Tastatur">
-        </div>
+        <h2>Hallo <span class="Spielername"></span>!</h2>
+        <div id="Kategorie"></div>
+        <div id="LoesungsWort"></div>
+        <div id="Tastatur"></div>
     </div>
 </body>
 </html>
