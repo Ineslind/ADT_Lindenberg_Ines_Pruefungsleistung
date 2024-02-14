@@ -1,6 +1,8 @@
 body {
     margin: 0px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 100vw;
+    overflow: hidden;
 }
 input {
     font-size: 6vw;
@@ -8,9 +10,21 @@ input {
     background-color: rgba(255, 255, 255, 0.4);
     border-radius: 0.5vw;
 }
-.Szene {
+#Hintergrund {
     display: flex;
     position: absolute;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    background-image: url(wasserspiegel.jpg);
+    background-size: cover;
+    background-position-x: center;
+    animation: hintergrundWabern 2s ease 0s alternate infinite;
+}
+.Szene {
+    display: flex;
+    position: relative;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -18,18 +32,7 @@ input {
     height: 100vh;
     transition: opacity 1s;
 }
-#IntroSzene {
-    background-image: url(wasserspiegel.jpg);
-    background-size: auto 120vh;
-    background-position-x: center;
-    animation: hintergrundWabern 2s ease 0s alternate infinite;
-}
-#SpielSzene {
-    background-image: url(wasserspiegel.jpg);
-    background-size: auto 120vh;
-    background-position-x: center;
-    animation: hintergrundWabern 2s ease 0s alternate infinite;
-}
+
 @keyframes hintergrundWabern {
     0% { background-position-y: -2vw }
     100% { background-position-y: 0vw }
@@ -56,11 +59,11 @@ input {
 .Spielername {
     font-weight: 600;
 }
-#Buttons {
+.Buttons {
     display: flex;
     flex-direction: row;
 }
-#Buttons > div {
+.Buttons > div {
     background-color: rgba(255, 255, 255, 0.6);
     margin: 2vw;
     padding: 0.5vw;
@@ -68,7 +71,7 @@ input {
     font-size: min(4vw, 17px);
     border-radius: 0.5vw;
 }
-#Buttons > div:hover {
+.Buttons > div:hover {
     background-color: rgba(255, 255, 255, 0.8);
 }
 

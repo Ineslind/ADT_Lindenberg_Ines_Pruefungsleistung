@@ -9,40 +9,69 @@
     <script type="text/javascript" src="worte.js"></script>
 </head>
 <body>
-    <div id="IntroSzene" class="Szene">
-        <div style="position: relative; height: 20vw">
+    <div id="Hintergrund">
+
+        <div id="IntroSzene" class="Szene">
+            <div style="position: relative; height: 20vw">
+                <div class="Anweisung versteckt">
+                    Gib hier deinen Namen ein:
+                </div>
+                <form>
+                    <input type="text" name="Spieler" placeholder="" value="" id="SpielerInput">
+                </form>
+            </div>
+            <div class="Buttons">
+                <div class="TrainingBtn">
+                    Training
+                </div>
+                <div class="HighscoreBtn">
+                    Arena
+                </div>
+                <div class="RanglisteBtn">
+                    Rangliste
+                </div>
+            </div>
             <div class="Anweisung versteckt">
-                Gib hier deinen Namen ein:
-            </div>
-            <form>
-                <input type="text" name="Spieler" placeholder="" value="" id="SpielerInput">
-            </form>
-        </div>
-        <div id="Buttons">
-            <div id="Training">
-                Training
-            </div>
-            <div id="Highscore">
-                Highscore
+                Wähle einen Modus.
             </div>
         </div>
-        <div class="Anweisung versteckt">
-            Wähle einen Modus.
+        
+        <div id="SpielSzene" class="Szene">
+            <div id="Vorlagen" style="display: none";>
+                <div class="LoesungsBuchstabe durchsichtig"></div>
+                <div class="TastaturBuchstabe durchsichtig"></div>
+                <div class="Ring durchsichtig"></div>
+            </div>
+            <div id="Kategorie"></div>
+            <div id="LoesungsWort"></div>
+            <div id="Tastatur"></div>
+            <div id="Leben"></div>
+            <div id="Fortschritt"><span class="Spielername"></span>, <span id="SpielNachricht"></span></div>
+        </div>
+        
+        <div id="SpielendeSzene" class="Szene">
+            <img class="Schlussbild" url="https://cdn2.thecatapi.com/images/2g3.jpg">
+            <div id="Auswertung"><span class="Spielername"></span>, <span id="EndeNachricht"></span></div>
+            <div class="Buttons">
+                <div class="NochmalBtn">
+                    Nochmal
+                </div>
+                <div class="RanglisteBtn">
+                    Rangliste
+                </div>
+            </div>
+            
+        </div>
+        
+        <div id="RanglisteSzene" class="Szene">
+            <div class="Buttons">
+                <div class="StartBtn">
+                    Zum Start
+                </div>
+            </div>
         </div>
     </div>
-    
-    <div id="SpielSzene" class="Szene ausgeblendet">
-        <div id="Vorlagen" style="display: none";>
-            <div class="LoesungsBuchstabe durchsichtig"></div>
-            <div class="TastaturBuchstabe durchsichtig"></div>
-            <div class="Ring durchsichtig"></div>
-        </div>
-        <div id="Kategorie"></div>
-        <div id="LoesungsWort"></div>
-        <div id="Tastatur"></div>
-        <div id="Leben"></div>
-        <div id="Fortschritt"><span class="Spielername"></span>, <span id="Nachricht"></span></div>
-    </div>
+        
 </body>
 </html>
 

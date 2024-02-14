@@ -1,7 +1,6 @@
 let Highscores = []
 let aktuellerScore = 0
-const maxLeben = 10
-let Leben = maxLeben
+const maxLeben = 2
 let verwendeteWorte = [];
 let zufallsKategorie = ""
 let zufallsWort = ""
@@ -9,27 +8,64 @@ let Modus = "Training"
 
 setTimeout(() => {
     
-    document.querySelector(".Anweisung").classList.remove("versteckt"); 
-    document.getElementById("Buttons").addEventListener("click", event => {
-        if (event.target.id != "Buttons") {
-            Modus = event.target.id
-            
-            const spielerName =  document.getElementById("SpielerInput").value
-            document.querySelectorAll(".Spielername").forEach(e => {
-                e.textContent = spielerName
-            });
-            
-            BaueSpielfeld()
-            BaueAnzeigen()
-            TastaturBehandlung()
-            WechsleSzene()
-        }
+    TastaturBehandlung()
+    gehezuIntroSzene()
+
+    Array.from(document.getElementsByClassName("Buttons")).forEach(buttons => {
+        buttons.addEventListener("click", event => {
+            if (event.target.classList.contains("StartBtn")) {
+                gehezuIntroSzene()
+            }
+            else if (event.target.classList.contains("RanglisteBtn")) {
+                gehezuRanglisteSzene()
+            }
+            else if (event.target.classList.contains("NochmalBtn")) {
+                gehezuSpielSzene()
+            }
+            else if (event.target.classList.contains("TrainingBtn")) {
+                Modus = "Training"
+                gehezuSpielSzene()
+            }
+            else if (event.target.classList.contains("HighscoreBtn")) {
+                Modus = "Highscore"
+                gehezuSpielSzene()
+            }
+        })
     })
 }, 500)
 
-function WechsleSzene() {
-    document.getElementById("IntroSzene").classList.toggle("ausgeblendet")
-    document.getElementById("SpielSzene").classList.toggle("ausgeblendet")
+function gehezuIntroSzene() {
+    Leben = maxLeben;
+    document.querySelector(".Anweisung").classList.remove("versteckt"); 
+    WechsleSzene("IntroSzene")
+}
+
+function gehezuSpielSzene() {
+    ErsetzeNamensplatzhalter()
+    BaueSpielfeld()
+    BaueAnzeigen()
+    WechsleSzene("SpielSzene")
+}
+
+function gehezuSpielendeSzene() {
+    zeigeEndeNachricht();
+    WechsleSzene("SpielendeSzene")
+}
+
+function gehezuRanglisteSzene() {
+    WechsleSzene("RanglisteSzene")
+}
+
+function ErsetzeNamensplatzhalter() {
+    const spielerName =  document.getElementById("SpielerInput").value || "Gast"
+    document.querySelectorAll(".Spielername").forEach(e => {
+        e.textContent = spielerName
+    });
+}
+
+function WechsleSzene(Zielszene) {
+    const idListe = Array.from(document.getElementsByClassName("Szene")).map(element => element.id);
+    document.getElementById("Hintergrund").style.marginTop = idListe.findIndex(id => id === Zielszene) * (-100) + "vh"
 }
 
 function WortWurdeErraten() {
@@ -93,6 +129,7 @@ function LoseWort() {
         // Ich unterstelle, dass nie alle Worte verbraucht werden
         LoseWort()
     }
+    zufallsWort = "ABC" 
     verwendeteWorte.push(zufallsWort);
 }
 
@@ -122,7 +159,7 @@ function BaueAnzeigen() {
         document.getElementById("Vorlagen").querySelector(".Ring"),
         true
     )
-    zeigeNachricht();
+    zeigeSpielNachricht();
 }
 
 function TastaturBehandlung() {
@@ -130,15 +167,21 @@ function TastaturBehandlung() {
         const buchstabe = BenutzeTaste(event.target)
         if (buchstabe) {
             if (!RateBuchstabe(zufallsWort, buchstabe)) {
-                reduziereLeben();
+                if (reduziereLeben() === 0) {
+                    if (Modus === "Training") {
+                        gehezuIntroSzene()
+                    }
+                    else {
+                        gehezuSpielendeSzene()
+                    }
+                }
             }
             else if (Modus === "Training" && WortWurdeErraten()) {
-                WechsleSzene();
-                Leben = maxLeben;
+                gehezuIntroSzene()
             }
             else if (Modus === "Highscore" && WortWurdeErraten()) {
                 aktuellerScore += 1;
-                zeigeNachricht();
+                zeigeSpielNachricht();
                 BaueSpielfeld();
             }
         }
@@ -150,13 +193,25 @@ function reduziereLeben() {
     document.getElementById("Leben").removeChild(
         document.getElementById("Leben").lastChild
     )
+    return Leben;
 }
 
-function zeigeNachricht() {
+function zeigeSpielNachricht() {
     if (Modus === "Training") {
-        document.getElementById("Nachricht").textContent = "viel Spaß beim Training."
+        document.getElementById("SpielNachricht").textContent = "viel Spaß beim Training."
     }
     else {
-        document.getElementById("Nachricht").textContent = "du hast " + (aktuellerScore? aktuellerScore : "noch keine") + " Begriffe erraten."
+        document.getElementById("SpielNachricht").textContent =
+            "du hast " + 
+            (
+                aktuellerScore === 0 ? "noch keine Begriffe" :
+                aktuellerScore === 1 ? "deinen ersten Begriff" :
+                 "bereits " + aktuellerScore + " Begriffe" 
+            ) +
+            " erraten."
     }
+}
+
+function zeigeEndeNachricht() {
+    document.getElementById("EndeNachricht").textContent = "das Spiel ist zuende"
 }
