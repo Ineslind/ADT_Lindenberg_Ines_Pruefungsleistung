@@ -1,10 +1,46 @@
+class Rangliste {
+    constructor() {
+        this.eintraege = [];
+        this.ladeAusCookie();
+    }
+
+    neuerEintrag(Name, Wortanzahl) {
+        this.eintraege.push({ Name, Wortanzahl });
+        this.eintraege.sort((a, b) => b.Wortanzahl - a.Wortanzahl);
+        this.speichereInCookie();
+
+        return (Wortanzahl === this.eintraege[0].Wortanzahl)
+    }
+
+    ladeAusCookie() {
+        const cookieDaten = document.cookie;
+        if (cookieDaten) {
+            console.log(cookieDaten)
+            //this.entries = JSON.parse(cookieDaten);
+        }
+    }
+
+    speichereInCookie() {
+        const cookieDaten = JSON.stringify(this.eintraege);
+        document.cookie = 'rangliste=' + cookieDaten;
+    }
+
+    zeigeRangListe( Zeilen, AusgabeFunktion) {
+        for (let i = 0; i < Zeilen && i < this.eintraege.length; i++) {
+            AusgabeFunktion(i + 1, this.eintraege[i].Name, this.eintraege[i].Wortanzahl)
+        }
+    }
+}
+
 let Highscores = []
 let aktuellerScore = 0
 const maxLeben = 2
+let Leben = maxLeben;
 let verwendeteWorte = [];
 let zufallsKategorie = ""
 let zufallsWort = ""
 let Modus = "Training"
+let Scores = new Rangliste();
 
 setTimeout(() => {
     
@@ -41,6 +77,7 @@ function gehezuIntroSzene() {
 }
 
 function gehezuSpielSzene() {
+    aktuellerScore = 0;
     ErsetzeNamensplatzhalter()
     BaueSpielfeld()
     BaueAnzeigen()
@@ -53,6 +90,10 @@ function gehezuSpielendeSzene() {
 }
 
 function gehezuRanglisteSzene() {
+    document.getElementById("Liste").innerHTML = "";
+    Scores.zeigeRangListe(10, (rang, name, worte) => {
+        document.getElementById("Liste").innerHTML += rang + ". " + name + ": " + worte + " Worte<br>"
+    })
     WechsleSzene("RanglisteSzene")
 }
 
@@ -213,5 +254,17 @@ function zeigeSpielNachricht() {
 }
 
 function zeigeEndeNachricht() {
-    document.getElementById("EndeNachricht").textContent = "das Spiel ist zuende"
+    const spielerName =  document.getElementById("SpielerInput").value || "Gast"
+    let besterScore = false
+
+    if (aktuellerScore > 0) {
+        besterScore = Scores.neuerEintrag(spielerName, aktuellerScore)
+    }
+
+    document.getElementById("EndeNachricht").innerHTML =  "das Spiel ist zuende.<br>" + 
+    (
+        aktuellerScore === 0 ? "Kein Wort erraten - magst du erst noch trainieren?" :
+        besterScore === true ? "Glückwunsch - du hast einen neuen Highscore erzielt!" :
+        aktuellerScore + " Worte erraten - sehr gut!"
+    )
 }
