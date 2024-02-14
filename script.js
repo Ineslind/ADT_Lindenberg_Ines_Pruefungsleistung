@@ -15,8 +15,9 @@ class Rangliste {
     ladeAusCookie() {
         const cookieDaten = document.cookie;
         if (cookieDaten) {
-            console.log(cookieDaten)
-            //this.entries = JSON.parse(cookieDaten);
+            // hier müssen die cookie-Daten noch geparst werden, wenn die Highscoreliste
+            // nach einem Reload der Seite erhalten bleiben soll
+            // this.entries = JSON.parse(cookieDaten);
         }
     }
 
@@ -32,9 +33,12 @@ class Rangliste {
     }
 }
 
+// gegebenenfalls auf true setzen
+const testModus = false;
+
 let Highscores = []
 let aktuellerScore = 0
-const maxLeben = 2
+const maxLeben = testModus ? 2 : 10
 let Leben = maxLeben;
 let verwendeteWorte = [];
 let zufallsKategorie = ""
@@ -170,7 +174,10 @@ function LoseWort() {
         // Ich unterstelle, dass nie alle Worte verbraucht werden
         LoseWort()
     }
-    zufallsWort = "ABC" 
+    
+    if (testModus) {
+        zufallsWort = "ABC" 
+    }
     verwendeteWorte.push(zufallsWort);
 }
 
@@ -261,10 +268,32 @@ function zeigeEndeNachricht() {
         besterScore = Scores.neuerEintrag(spielerName, aktuellerScore)
     }
 
-    document.getElementById("EndeNachricht").innerHTML =  "das Spiel ist zuende.<br>" + 
+    document.getElementById("EndeNachricht").innerHTML =  "das Spiel ist zu Ende.<br>" + 
     (
         aktuellerScore === 0 ? "Kein Wort erraten - magst du erst noch trainieren?" :
         besterScore === true ? "Glückwunsch - du hast einen neuen Highscore erzielt!" :
         aktuellerScore + " Worte erraten - sehr gut!"
     )
+
+    holeUndSetzeBild()
+}
+
+function holeUndSetzeBild() {
+    const url = `https://api.thecatapi.com/v1/images/search`;
+    const api_key = "DEMO_API_KEY"
+
+    fetch(url, {
+        headers: {
+            'x-api-key': api_key
+        }
+    })
+    .then(response => {
+        return response.json();
+    })
+    .then(data => {
+        document.getElementById('Schlussbild').src = data[0].url
+    })
+    .catch(error => {
+        console.error('Vermutlich gibt es einen CORS Fehler - bitte CORS Einschränkungen des Browsers abschalten:', error)
+    });   
 }

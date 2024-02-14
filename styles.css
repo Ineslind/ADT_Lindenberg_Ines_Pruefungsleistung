@@ -170,3 +170,8 @@ input {
     text-align: left;
     font-size: 3vw;
 }
+.Schlussbild {
+    max-width: 50vw;
+    max-height: 50vh;
+    padding-bottom: 20px;
+}
